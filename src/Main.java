@@ -292,6 +292,6 @@ public class Main {
         return str;
     }
     public static void main(String[] args) {
-        System.out.println(calc("0 * 9"));
+        System.out.println(calc("a + b"));
     }
 }
