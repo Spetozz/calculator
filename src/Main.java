@@ -285,6 +285,8 @@ public class Main {
         return str;
     }
     public static void main(String[] args) {
-        System.out.println(calc("a + b"));
+        Scanner scanner = new Scanner(System.in);
+        String str = scanner.nextLine();
+        System.out.println(calc(str));
     }
 }
