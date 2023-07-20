@@ -1,5 +1,8 @@
+import java.util.*;
+import java.io.IOException;
+
 public class Main {
-    public static String calc(String str) {
+    public static String calc(String str) throws IOException {
         //Инициализируем переменные
         int num1, num2, isRome1, isRome2, sum, dif, mul, div, calculation;
         calculation = 0;
@@ -11,8 +14,7 @@ public class Main {
         String[] words = str.split(" ");
         //Если строка не соответствует формату a + b, a - b, a * b, a / b, то программа выдаёт ошибку
         if (words.length !=3) {
-            str = "throws Exception";
-            return str;
+            throw new IOException();
         }
         //Переводим элементы массива в числа, при этом запоминаем римское ли данное число
         switch (words[0]) {
@@ -96,22 +98,18 @@ public class Main {
                 num1 = 10;
                 isRome1 = 1;
             }
-            default -> {
+            default ->
                 //Все остальные числа нам не подходят из условия
-                str = "throws Exception";
-                return str;
-            }
+                throw new IOException();
         }
         switch (words[1]) {
             case "+" -> sum = 1;
             case "-" -> dif = 1;
             case "*" -> mul = 1;
             case "/" -> div = 1;
-            default -> {
+            default ->
                 //Все остальные знаки нам не подходят из условия
-                str = "throws Exception";
-                return str;
-            }
+                throw new IOException();
         }
         switch (words[2]) {
             case "1" -> {
@@ -194,11 +192,9 @@ public class Main {
                 num2 = 10;
                 isRome2 = 1;
             }
-            default -> {
+            default ->
                 //Все остальные числа нам не подходят из условия
-                str = "throws Exception";
-                return str;
-            }
+                throw new IOException();
         }
         //Выполняем арифметическую операцию
         if (sum == 1) {
@@ -229,6 +225,10 @@ public class Main {
                 if (calculation - 50 >= 0) {
                     calculation -= 50;
                     strBuilder.append("L");
+                }
+                if (calculation - 40 >= 0) {
+                    calculation -= 40;
+                    strBuilder.append("XL");
                 }
                 if (calculation - 10 >= 0) {
                     calculation -= 10;
@@ -278,8 +278,7 @@ public class Main {
         }
         //Если одно число римское, а другое арабское, то выведется ошибка
         else {
-            str = "throws Exception";
-            return str;
+            throw new IOException();
         }
         //Вернём ответ
         return str;
@@ -287,6 +286,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine();
-        System.out.println(calc(str));
+        try {
+            System.out.println(calc(str));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
